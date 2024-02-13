@@ -133,8 +133,18 @@ require("nvim-tree").setup {
     filters = {
         git_ignored = true,
         dotfiles = true,
+
         -- Custom list of vim regex for file/directory names that will not be shown.
-        custom = {},
+        custom = { 
+            enable = true,
+            "Applications", 
+            "Desktop", 
+            "go", 
+            "Music", 
+            "Movies", 
+            "Pictures", 
+            "Public",
+        },
         -- List of directories or files to exclude from filtering: always show them.
         exclude = {".config", ".local"},
     },
@@ -186,3 +196,4 @@ require("nvim-tree").setup {
         },
     },
 }
+

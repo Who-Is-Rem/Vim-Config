@@ -18,37 +18,34 @@ local plugins = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
     { 'nvim-treesitter/nvim-treesitter',          build = ":TSUpdate" },
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
-    "p00f/nvim-ts-rainbow",
-    {"ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" }},
+    'nvim-telescope/telescope.nvim', -- search through files
 
     -- Utility
-    "folke/which-key.nvim",
+    "folke/which-key.nvim", -- gui for reminder of key mappings
 
     -- nvim tree
     'mbbill/undotree',
     "nvim-tree/nvim-tree.lua",
-    'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons', -- used in nvim-tree for the little icons
 
     -- Aesthetics
-    'itchyny/lightline.vim',
-    'lukas-reineke/virt-column.nvim',
-    'windwp/nvim-autopairs',
-    'rcarriga/nvim-notify',
-    "catppuccin/nvim",
+    'itchyny/lightline.vim',          -- better ui for mdoes on the bottom
+    'lukas-reineke/virt-column.nvim', -- vertical column to the right
+    'windwp/nvim-autopairs',          -- auto completion for ", ', [, etc.
+    'rcarriga/nvim-notify',           -- notification thing, may remove *********
+    "catppuccin/nvim",                -- color scheme
+    "p00f/nvim-ts-rainbow",           -- color parethesis
 
     -- CMP plugins
     "hrsh7th/nvim-cmp",    -- The completion plugin
     "hrsh7th/cmp-buffer",  -- buffer completions
     "hrsh7th/cmp-path",    -- path completions
     "hrsh7th/cmp-cmdline", -- cmdline completions
+
+    -- snippet completions
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lsp",
     "rafamadriz/friendly-snippets",
-
-    -- snippet completions
     'L3MON4D3/LuaSnip',
 
     -- lsp
@@ -58,10 +55,10 @@ local plugins = {
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
 
     -- Code Runner
-    { "CRAG666/code_runner.nvim", config = true },
+    { "CRAG666/code_runner.nvim",  config = true }, -- may delete didn't really use *****
 
-    -- autosave 
-    'Pocco81/auto-save.nvim', 
+    -- autosave
+    'Pocco81/auto-save.nvim', -- auto saves on stop edit
 
     -- Need to research how to properly  more
     -- USED FOR GIT

@@ -31,13 +31,21 @@ require('telescope').setup {
 
 -- 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false })
 local builtin = require('telescope.builtin')
+
 vim.keymap.set('n', '<leader>ff', function()
     builtin.find_files(require('telescope.themes').get_dropdown({
         previewer = false,
-        search_dirs = { "~/Documents", "~/.config/nvim", "~/.local/share/nvim/" },
-        --search_file = { "~/task" }
+        search_dirs = { "~/Documents", "~/.config/nvim" },
     }))
 end)
+
+vim.keymap.set('n', '<leader>cd', function()
+    builtin.find_files(require('telescope.themes').get_dropdown({
+        previewer = false,
+        search_dirs = { "./.." },
+    }))
+end)
+
 vim.keymap.set("n", "<leader>gg", function()
     builtin.live_grep {
         layout_strategy = "horizontal",
