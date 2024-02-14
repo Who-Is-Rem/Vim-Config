@@ -8,10 +8,11 @@ vim.g.maplocalleader = " "
 
 -- Simple Shortcuts
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts) -- opens explorer
-keymap("n", "<leader>h", ":tab help<CR>", opts) -- opens help in new tab
+keymap("n", "<leader>h", ":tab help<cr>", opts) -- opens help in new tab
 keymap({ "i", "c", "x", "n" }, "œ", "<esc>", opts) -- <esc> in vim
 keymap('t', 'œ', '<C-\\><C-N>', opts) -- <esc> but in terminal
 keymap("n", "q", "ZQ", opts) -- closes current buff
+keymap("n", "ç˙", ":checkhealth<cr>", opts) -- checkhealth shortcut
 
 keymap("n", "†", ":15split<cr>:terminal<cr>i", opts) -- opens terminal
 keymap('n', '<leader>t', vim.cmd.UndotreeToggle) -- opens undotree
@@ -24,47 +25,34 @@ keymap("n", "Ò", "<C-w>l", opts)
 
 keymap("n", "˙", "gT", opts) -- moves to the left tab
 keymap("n", "¬", "gt", opts) -- moves to the right tab
-keymap("n", "<leader>nt", ":tabnew<CR>", opts) -- creates new tab
+keymap("n", "<leader>nt", ":tabnew<cr>", opts) -- creates new tab
 
 keymap("n", "<leader>vs", ":vne<cr>", opts) -- vertical split
 keymap("n", "<leader>hs", ":ne<cr>", opts) -- horizontal split
+
+-- Grapple
+keymap("n", "<C-e>", ":GrapplePopup tags<cr>", opts)
+keymap("n", "<C-t>", ":GrappleToggle<cr>", opts)
+keymap("n", "<C-n>", ":GrappleTag key=", opts)
 
 -- Text Editing
 keymap("v", "<", "<gv^", opts) -- shift text to the left
 keymap("v", ">", ">gv^", opts) -- shift text to the right
 keymap({ "n", "v" }, "<leader>y", "\"+y", opts) -- copies whole paragraph
 keymap({ "n", "v" }, "<leader>Y", "\"+Y", opts) -- copies whole line
-keymap("v", "∆", ":m '>+1<CR>gv=gv", opts) -- moves highlighted text down
-keymap("v", "˚", ":m '<-2<CR>gv=gv", opts) -- moves highlighted text up
+keymap("v", "∆", ":m '>+1<cr>gv=gv", opts) -- moves highlighted text down
+keymap("v", "˚", ":m '<-2<cr>gv=gv", opts) -- moves highlighted text up
 
 keymap("x", "<leader>p", "\"_dP", opts) -- keeps copied text
-
--- Text Navigation
-keymap("n", "<S-h>", "b", opts)
-keymap("n", "<S-l>", "w", opts)
-keymap("n", "<C-h>", "^", opts)
-keymap("n", "<C-l>", "g_", opts)
+keymap("n", "<leader>f", function() -- formatting
+    vim.lsp.buf.format()
+end)
 
 -- edits word that the cursor is on
 keymap("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- don't quite get how this one works
-keymap({ "n", "v" }, "<leader>d", "\"_d", opts)
-
--- formatting
-keymap("n", "<leader>f", function()
-    vim.lsp.buf.format()
-end)
-
--- Code Runner
-keymap("v", "®", ":<cr>", opts)
-keymap("n", "®", ":SnipRun<cr>", opts)
-
 -- toggle autosave
-keymap("n", "<leader>n", ":ASToggle<CR>", opts)
-
--- checkhealth shortcut
-keymap("n", "ç˙", ":checkhealth<cr>", opts)
+keymap("n", "<leader>n", ":ASToggle<cr>", opts)
 
 -- Symbol keymaps
 keymap("i", "ßa", "α", opts)
@@ -92,3 +80,30 @@ keymap("i", "ßT", "Θ", opts)
 keymap("i", "ßO", "Ω", opts)
 keymap("i", "ßP", "Φ", opts)
 keymap("i", "ßS", "Σ", opts)
+
+
+-- venn.nvim: enable or disable keymappings
+function _G.Toggle_venn()
+    local venn_enabled = vim.inspect(vim.b.venn_enabled)
+    if venn_enabled == "nil" then
+        vim.opt.ve = "all"
+        vim.b.venn_enabled = true
+        vim.cmd[[setlocal ve=all]]
+        -- draw a line on HJKL keystokes
+        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
+        -- draw a box by pressing "f" with visual selection
+        vim.api.nvim_buf_set_keymap(0, "v", "b", ":VBox<CR>", {noremap = true})
+    else
+        vim.opt.ve = ""
+        vim.cmd[[setlocal ve=]]
+        vim.cmd[[mapclear <buffer>]]
+        vim.b.venn_enabled = nil
+    end
+end
+-- toggle keymappings for venn using <leader>v
+vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
+
+

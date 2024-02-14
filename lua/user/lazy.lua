@@ -19,9 +19,11 @@ local plugins = {
     { 'nvim-treesitter/nvim-treesitter',          build = ":TSUpdate" },
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim', -- search through files
+    "cbochs/grapple.nvim",           -- marking files
 
     -- Utility
     "folke/which-key.nvim", -- gui for reminder of key mappings
+    {'numToStr/Comment.nvim', lazy = false,}, -- for easier commenting
 
     -- nvim tree
     'mbbill/undotree',
@@ -29,7 +31,7 @@ local plugins = {
     'nvim-tree/nvim-web-devicons', -- used in nvim-tree for the little icons
 
     -- Aesthetics
-    'itchyny/lightline.vim',          -- better ui for mdoes on the bottom
+    'itchyny/lightline.vim',          -- better ui for modes on the bottom
     'lukas-reineke/virt-column.nvim', -- vertical column to the right
     'windwp/nvim-autopairs',          -- auto completion for ", ', [, etc.
     'rcarriga/nvim-notify',           -- notification thing, may remove *********
@@ -53,9 +55,6 @@ local plugins = {
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
-
-    -- Code Runner
-    { "CRAG666/code_runner.nvim",  config = true }, -- may delete didn't really use *****
 
     -- autosave
     'Pocco81/auto-save.nvim', -- auto saves on stop edit
