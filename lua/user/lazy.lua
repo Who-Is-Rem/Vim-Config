@@ -24,6 +24,7 @@ local plugins = {
     -- Utility
     "folke/which-key.nvim", -- gui for reminder of key mappings
     {'numToStr/Comment.nvim', lazy = false,}, -- for easier commenting
+    'Pocco81/auto-save.nvim', -- auto saves on stop edit
 
     -- nvim tree
     'mbbill/undotree',
@@ -37,6 +38,7 @@ local plugins = {
     'rcarriga/nvim-notify',           -- notification thing, may remove *********
     "catppuccin/nvim",                -- color scheme
     "p00f/nvim-ts-rainbow",           -- color parethesis
+    "jbyuki/venn.nvim", -- draw diagrams with ascii chars
 
     -- CMP plugins
     "hrsh7th/nvim-cmp",    -- The completion plugin
@@ -56,15 +58,15 @@ local plugins = {
     'neovim/nvim-lspconfig',
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
 
-    -- autosave
-    'Pocco81/auto-save.nvim', -- auto saves on stop edit
+    -- Latex 
+    "frabjous/knap", -- auto previewer
+    "HakonHarnes/img-clip.nvim", -- image insertion
 
     -- Need to research how to properly  more
     -- USED FOR GIT
     'tpope/vim-fugitive',
 
     -- Not yet in a category
-    "jbyuki/venn.nvim", -- draw diagrams with ascii chars
 }
 
 -- List of options

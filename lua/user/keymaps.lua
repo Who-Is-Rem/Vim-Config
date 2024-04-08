@@ -13,8 +13,9 @@ keymap({ "i", "c", "x", "n" }, "œ", "<esc>", opts) -- <esc> in vim
 keymap('t', 'œ', '<C-\\><C-N>', opts) -- <esc> but in terminal
 keymap("n", "q", "ZQ", opts) -- closes current buff
 keymap("n", "ç˙", ":checkhealth<cr>", opts) -- checkhealth shortcut
+keymap("n", "gd", function() vim.lsp.buf.definition() end, opts) -- goes to the function definition
 
-keymap("n", "†", ":15split<cr>:terminal<cr>i", opts) -- opens terminal
+keymap("n", "†", ":60vsplit<cr>:terminal<cr>i", opts) -- opens terminal
 keymap('n', '<leader>t', vim.cmd.UndotreeToggle) -- opens undotree
 
 -- Window Navigation
@@ -48,6 +49,17 @@ keymap("n", "<leader>f", function() -- formatting
     vim.lsp.buf.format()
 end)
 
+-- Latex
+-- F5 processes the document once, and refreshes the view
+keymap({ 'n', 'v', 'i' }, '<F5>', function() require("knap").process_once() end)
+-- F6 closes the viewer application, and allows settings to be reset
+keymap({ 'n', 'v', 'i' }, '<F6>', function() require("knap").close_viewer() end)
+-- F7 toggles the auto-processing on and off
+keymap({ 'n', 'v', 'i' }, '<F7>', function() require("knap").toggle_autopreviewing() end)
+-- F8 invokes a SyncTeX forward search, or similar, where appropriate
+keymap({ 'n', 'v', 'i' }, '<F8>', function() require("knap").forward_jump() end)
+
+
 -- edits word that the cursor is on
 keymap("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
@@ -69,6 +81,7 @@ keymap("i", "ßm", "μ", opts)
 keymap("i", "ßn", "η", opts)
 keymap("i", "ßo", "ω", opts)
 keymap("i", "ßp", "π", opts)
+keymap("i", "ßq", "√", opts)
 keymap("i", "ßr", "ρ", opts)
 keymap("i", "ßs", "σ", opts)
 keymap("i", "ßt", "τ", opts)
@@ -80,6 +93,7 @@ keymap("i", "ßT", "Θ", opts)
 keymap("i", "ßO", "Ω", opts)
 keymap("i", "ßP", "Φ", opts)
 keymap("i", "ßS", "Σ", opts)
+keymap("i", "ßI", "∫", opts)
 
 
 -- venn.nvim: enable or disable keymappings
@@ -88,22 +102,21 @@ function _G.Toggle_venn()
     if venn_enabled == "nil" then
         vim.opt.ve = "all"
         vim.b.venn_enabled = true
-        vim.cmd[[setlocal ve=all]]
+        vim.cmd [[setlocal ve=all]]
         -- draw a line on HJKL keystokes
-        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
         -- draw a box by pressing "f" with visual selection
-        vim.api.nvim_buf_set_keymap(0, "v", "b", ":VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "b", ":VBox<CR>", { noremap = true })
     else
         vim.opt.ve = ""
-        vim.cmd[[setlocal ve=]]
-        vim.cmd[[mapclear <buffer>]]
+        vim.cmd [[setlocal ve=]]
+        vim.cmd [[mapclear <buffer>]]
         vim.b.venn_enabled = nil
     end
 end
+
 -- toggle keymappings for venn using <leader>v
-vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
-
-
+vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true })

@@ -31,7 +31,8 @@ local symbol_mappings = {
         t = "τ",
         x = "є",
         z = "ζ",
-
+        
+        I = "∫",
         D = "Δ",
         T = "Θ",
         O = "Ω",

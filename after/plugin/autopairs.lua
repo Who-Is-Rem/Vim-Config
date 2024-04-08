@@ -13,8 +13,8 @@ npairs.setup {
     chars = { "{", "[", "(", '"', "'" },
     pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
     offset = 0, -- Offset from pattern match
-    end_key = "`",
-    keys = "qwertyuiopzxcvbnmasdfghjkl",
+    end_key = "q",
+    keys = "werasdfzxcv",
     check_comma = true,
     highlight = "PmenuSel",
     highlight_grey = "LineNr",

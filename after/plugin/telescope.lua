@@ -2,7 +2,7 @@ require('telescope').setup {
     defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-        path_display = { "smart" },
+        path_display = {  },  -- "smart"
 
         mappings = {
             i = {
@@ -32,10 +32,17 @@ require('telescope').setup {
 -- 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false })
 local builtin = require('telescope.builtin')
 
+vim.keymap.set('n', '<leader>kk', function()
+    builtin.find_files {
+        previewer = true,
+        search_dirs = { "/System/Library/" },
+    }
+end)
+
 vim.keymap.set('n', '<leader>ff', function()
     builtin.find_files(require('telescope.themes').get_dropdown({
         previewer = false,
-        search_dirs = { "~/Documents", "~/.config/nvim" },
+        search_dirs = { "~/Documents", "~/.config/nvim", "~/.zshrc" },
     }))
 end)
 
