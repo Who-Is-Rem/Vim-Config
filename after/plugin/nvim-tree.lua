@@ -146,7 +146,7 @@ require("nvim-tree").setup {
             "Public",
         },
         -- List of directories or files to exclude from filtering: always show them.
-        exclude = {".config", ".local", ".ocamlformat" , ".ocamlinit" , ".zshrc", ".gitignore" },
+        exclude = {".config", ".local", ".ocamlformat" , ".ocamlinit" , ".zshrc", ".gitignore", ".aliases" },
     },
 
     -- somehow improves efficiency, look into if bored
